@@ -14,5 +14,9 @@
   "bugs": {
     "url": "https://github.com/ericoalmeida/referrals-service/issues"
   },
-  "homepage": "https://github.com/ericoalmeida/referrals-service#readme"
+  "homepage": "https://github.com/ericoalmeida/referrals-service#readme",
+  "engines": {
+    "node": ">=18.12.1",
+    "npm": ">=8.19.2"
+  }
 }
