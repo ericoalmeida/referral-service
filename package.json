@@ -18,5 +18,9 @@
   "engines": {
     "node": ">=18.12.1",
     "npm": ">=8.19.2"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.2.0",
+    "@commitlint/config-conventional": "^17.2.0"
   }
 }
