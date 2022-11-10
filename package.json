@@ -1,20 +1,20 @@
 {
-  "name": "referrals-service",
+  "name": "referral-service",
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ericoalmeida/referrals-service.git"
+    "url": "git+https://github.com/ericoalmeida/referral-service.git"
   },
   "keywords": [],
   "author": "@ericoalmeida",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ericoalmeida/referrals-service/issues"
+    "url": "https://github.com/ericoalmeida/referral-service/issues"
   },
-  "homepage": "https://github.com/ericoalmeida/referrals-service#readme",
+  "homepage": "https://github.com/ericoalmeida/referral-service#readme",
   "engines": {
     "node": ">=18.12.1",
     "npm": ">=8.19.2"
