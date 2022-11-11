@@ -1,2 +1,7 @@
+#folders
+build
 docs
 node_modules
+
+#files
+.tsbuildinfo
