@@ -1,5 +1,6 @@
 #folders
 build
+coverage
 docs
 node_modules
 
