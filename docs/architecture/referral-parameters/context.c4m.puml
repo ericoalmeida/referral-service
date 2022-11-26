@@ -5,8 +5,8 @@ Person(bankingCustomer, "Customer", "A customer of the bank")
 System_Ext(gatewayMobile, "Gateway Mobile", "Application gateway")
 System(referralService, "Referral Service", "Provides user referral code")
 
-Rel_R(bankingCustomer, gatewayMobile, "Gets and/or Create a referral code")
-Rel(gatewayMobile, referralService, "Gets and/or Create a referral code")
+Rel_R(bankingCustomer, gatewayMobile, "Gets a referral parameters")
+Rel(gatewayMobile, referralService, "Gets a referral parameters")
 
 SHOW_LEGEND()
 
