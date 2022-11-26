@@ -16,7 +16,7 @@ System_Boundary(systemContainer, "Referral Service") {
   ContainerDb(database, "Database", "PostgreSQL", "Holds referral codes information", $sprite="postgresql")
 }
 
-Rel(bankingCustomer, mobileApp, "Gets and/or create a referral code")
+Rel(bankingCustomer, mobileApp, "Gets a referral parameters")
 Rel_R(mobileApp, gatewayMobile, "Makes API calls to", "JSON/HTTP")
 Rel(gatewayMobile, referralService, "Makes API calls to", "JSON/HTTP")
 Rel_L(referralService, database, "Reads from and writes to", "ORM/PL-PGSQL")
