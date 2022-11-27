@@ -50,6 +50,7 @@
     "module-alias": "^2.2.2"
   },
   "_moduleAliases": {
-    "@main": "./src/main"
+    "@main": "./src/main",
+    "@presentation": "./src/presentation"
   }
 }

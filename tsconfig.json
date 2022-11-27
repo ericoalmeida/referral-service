@@ -8,7 +8,10 @@
     "module": "CommonJS",
     "rootDir": "./",
     "baseUrl": "./",
-    "paths": {},
+    "paths": {
+      "@main/*": ["./src/main/*"],
+      "@presentation/*": ["./src/presentation/*"]
+    },
     "allowJs": true,
     "declaration": true,
     "declarationMap": true,
@@ -22,5 +25,5 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true
-  },
+  }
 }
