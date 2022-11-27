@@ -1,6 +1,6 @@
-export interface HttpResponseProtocol<T = any> {
+export interface HttpResponseProtocol<T> {
   statusCode: number
-  body: {
+  body?: {
     data?: T
     error?: any
   }
