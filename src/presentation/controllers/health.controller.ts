@@ -1,3 +1,4 @@
+import { HttpStatusCodeConstants } from '@presentation/constants'
 import {
   ControllerProtocol,
   HealthRequestProtocol,
@@ -5,13 +6,12 @@ import {
   HttpResponseProtocol
 } from '@presentation/protocols'
 
-export class HealthController
-implements ControllerProtocol<HealthRequestProtocol, HealthResponseProtocol> {
+export class HealthController implements ControllerProtocol<HealthRequestProtocol, HealthResponseProtocol> {
   async handle (
     request: HealthRequestProtocol
   ): Promise<HttpResponseProtocol<HealthResponseProtocol>> {
     return {
-      statusCode: 204
+      statusCode: HttpStatusCodeConstants.NO_CONTENT
     }
   }
 }
