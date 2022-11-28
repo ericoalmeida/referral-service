@@ -1,12 +1,13 @@
-export enum HttpStatusCodeConstants {
-  CONTINUE = 100,
-  SWITCHING_PROTOCOL = 200,
-  EARLY_HINTS = 300,
-  OK = 200,
-  CREATED = 201,
-  ACCEPTED = 202,
-  NON_AUTHORITATIVE = 203,
-  NO_CONTENT = 204,
-  RESET_CONTENT = 205,
-  PARTIAL_CONTENT = 206,
+export const httpStatusCodeConstants = {
+  successful: {
+    ok: 200,
+    created: 201,
+    noContent: 204
+  },
+  clientError: {
+    badRequest: 400
+  },
+  serverError: {
+    internalServerError: 500
+  }
 }
