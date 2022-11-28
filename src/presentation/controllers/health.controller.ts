@@ -1,4 +1,5 @@
-import { HttpStatusCodeConstants } from '@presentation/constants'
+import { errorCodesConstants } from '@presentation/constants'
+import { httpInternalServerError, httpNoContent } from '@presentation/helpers'
 import {
   ControllerProtocol,
   HealthRequestProtocol,
@@ -6,12 +7,15 @@ import {
   HttpResponseProtocol
 } from '@presentation/protocols'
 
-export class HealthController implements ControllerProtocol<HealthRequestProtocol, HealthResponseProtocol> {
+export class HealthController
+implements ControllerProtocol<HealthRequestProtocol, HealthResponseProtocol> {
   async handle (
     request: HealthRequestProtocol
   ): Promise<HttpResponseProtocol<HealthResponseProtocol>> {
-    return {
-      statusCode: HttpStatusCodeConstants.NO_CONTENT
+    try {
+      return httpNoContent()
+    } catch (error) {
+      return httpInternalServerError(errorCodesConstants.healthCheckFailure)
     }
   }
 }
