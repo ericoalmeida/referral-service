@@ -54,6 +54,9 @@
     "prisma": "^4.7.0"
   },
   "_moduleAliases": {
+    "@data": "./src/data",
+    "@domain": "./src/domain",
+    "@infra": "./src/infra",
     "@main": "./src/main",
     "@presentation": "./src/presentation",
     "@tests": "./tests"
