@@ -5,9 +5,13 @@ import {
   HealthResponseProtocol
 } from '@presentation/protocols'
 
+import { HealthUseCaseStub } from '@tests/presentation/stubs'
+
 class HealthControllerFactory {
+  public health = new HealthUseCaseStub()
+
   public get sut (): ControllerProtocol<HealthRequestProtocol, HealthResponseProtocol> {
-    return new HealthController()
+    return new HealthController(this.health)
   }
 }
 
