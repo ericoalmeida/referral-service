@@ -54,6 +54,7 @@
   },
   "_moduleAliases": {
     "@main": "./src/main",
-    "@presentation": "./src/presentation"
+    "@presentation": "./src/presentation",
+    "@tests": "./tests"
   }
 }

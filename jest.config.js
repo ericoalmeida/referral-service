@@ -11,8 +11,13 @@ module.exports = {
     'lcov'
   ],
   roots: [
-    '<rootDir>/src'
+    '<rootDir>/src',
+    '<rootDir>/tests'
   ],
   testEnvironment: 'node',
-  transform: { '.+\\.ts$': 'ts-jest' }
+  transform: { '.+\\.ts$': 'ts-jest' },
+  moduleNameMapper: {
+    '@presentation/(.*)': '<rootDir>/src/presentation/$1',
+    '@tests/(.*)': '<rootDir>/tests/$1'
+  }
 }
