@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  database:
+    image: postgres:14.6-alpine
+    container_name: db.referral
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=referral
+    hostname: db_referral
+    volumes:
+      - db_referral.volume:/var/lib/postgresql/data
+    expose:
+      - 5432
+    ports:
+      - 5432:5432
+    networks:
+      - referral.network
+
+networks:
+  referral.network:
+    external:
+      true
+volumes:
+  db_referral.volume:
+    external:
+      true
