@@ -5,6 +5,9 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
+    "build": "rimraf build && tsc",
+    "build:production": "npm run build -- -p tsconfig-build.json",
+    "start": "node ./build/src/main/server.js",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:unit": "npm test -- --watch --config='./jest-unit.config.js'",
