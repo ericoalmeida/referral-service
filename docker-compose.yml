@@ -17,6 +17,25 @@ services:
       - 5432:5432
     networks:
       - referral.network
+  app:
+    build:
+      context: .
+      dockerfile: dockerfile.development
+    container_name: app.referral
+    depends_on:
+      - database
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db.referral.dev:5432/referral
+      - NODE_ENV=development
+    hostname: app.referral.dev
+    volumes:
+      - .:/app
+    networks:
+      - referral.network
+    expose:
+      - 7000
+    ports:
+      - 7000:7000
 
 networks:
   referral.network:
