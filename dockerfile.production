@@ -19,6 +19,10 @@ COPY --from=Builder /app/prisma ./prisma
 COPY --from=Builder /app/build ./build
 
 RUN npm install --omit=dev
-RUN npx prisma generate
+
+RUN npm install prisma -g && \
+npx prisma generate && \
+npm remove -g prisma && \
+npm remove -g npm
 
 CMD [ "npm","run", "start" ]
