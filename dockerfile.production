@@ -7,12 +7,9 @@ COPY . .
 RUN npm install && \
 npm run build:production
 
-EXPOSE 7000
-
 FROM node:18.12.1-alpine
 
 WORKDIR /app
-ENV PORT=7000
 
 COPY --from=Builder /app/package.json .
 COPY --from=Builder /app/prisma ./prisma
@@ -24,5 +21,7 @@ RUN npm install prisma -g && \
 npx prisma generate && \
 npm remove -g prisma && \
 npm remove -g npm
+
+EXPOSE ${PORT}
 
 CMD [ "npm","run", "start" ]
