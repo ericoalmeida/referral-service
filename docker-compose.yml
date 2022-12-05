@@ -17,13 +17,27 @@ services:
       - 5432:5432
     networks:
       - referral.network
+
+  db_migration:
+    build:
+      context: .
+      dockerfile: dockerfile.db.migration
+    container_name: db.migration
+    depends_on:
+      - database
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db.referral.dev:5432/referral
+    hostname: db.migration.dev
+    networks:
+      - referral.network
+
   app:
     build:
       context: .
       dockerfile: dockerfile.development
     container_name: app.referral
     depends_on:
-      - database
+      - db_migration
     environment:
       - DATABASE_URL=postgresql://postgres:postgres@db.referral.dev:5432/referral
       - NODE_ENV=development
