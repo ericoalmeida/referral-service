@@ -1,0 +1,28 @@
+name: integration
+
+on:
+  push:
+    branches-ignore:
+      - "main"
+  workflow_dispatch:
+    branches-ignore:
+      - "main"
+
+jobs:
+  lint:
+    container:
+      image: node:18.12.1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v2
+      - name: Setup environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Install NPM dependencies
+        run: npm install
+      - name: Check code lint
+        run: npm run lint
+      - name: Cleanup
+        run: rm -rf *

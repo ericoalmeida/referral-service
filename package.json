@@ -10,6 +10,7 @@
     "start": "node ./build/src/main/server.js",
     "start:dev": "node --inspect=0.0.0.0:${PORT_DEBUG} --nolazy ./build/src/main/server.js",
     "db:deploy":"prisma migrate deploy",
+    "lint":"eslint src/**",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:unit": "npm test -- --watch --config='./jest-unit.config.js'",
