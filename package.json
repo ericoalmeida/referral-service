@@ -8,6 +8,7 @@
     "build": "rimraf build && tsc",
     "build:production": "npm run build -- -p tsconfig-build.json",
     "start": "node ./build/src/main/server.js",
+    "start:dev": "node --inspect=0.0.0.0:${PORT_DEBUG} --nolazy ./build/src/main/server.js",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:unit": "npm test -- --watch --config='./jest-unit.config.js'",

@@ -27,6 +27,8 @@ services:
     environment:
       - DATABASE_URL=postgresql://postgres:postgres@db.referral.dev:5432/referral
       - NODE_ENV=development
+      - PORT=7000
+      - PORT_DEBUG=9222
     hostname: app.referral.dev
     volumes:
       - .:/app
@@ -34,8 +36,10 @@ services:
       - referral.network
     expose:
       - 7000
+      - 9222
     ports:
       - 7000:7000
+      - 9222:9222
 
 networks:
   referral.network:
