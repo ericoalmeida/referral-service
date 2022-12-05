@@ -1,6 +1,7 @@
 FROM node:18.12.1 AS Builder
 
-WORKDIR /app
+ARG APP_DIRECTORY=/app
+WORKDIR $APP_DIRECTORY
 
 COPY . .
 
@@ -9,11 +10,13 @@ npm run build:production
 
 FROM node:18.12.1-alpine
 
-WORKDIR /app
+WORKDIR $APP_DIRECTORY
 
-COPY --from=Builder /app/package.json .
-COPY --from=Builder /app/prisma ./prisma
-COPY --from=Builder /app/build ./build
+RUN apt-get update
+
+COPY --from=Builder $APP_DIRECTORY/package.json .
+COPY --from=Builder $APP_DIRECTORY/prisma ./prisma
+COPY --from=Builder $APP_DIRECTORY/build ./build
 
 RUN npm install --omit=dev
 
