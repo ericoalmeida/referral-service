@@ -8,7 +8,14 @@
     "module": "CommonJS",
     "rootDir": "./",
     "baseUrl": "./",
-    "paths": {},
+    "paths": {
+      "@data/*": ["./src/data/*"],
+      "@domain/*": ["./src/domain/*"],
+      "@infra/*": ["./src/infra/*"],
+      "@main/*": ["./src/main/*"],
+      "@presentation/*": ["./src/presentation/*"],
+      "@tests/*": ["./tests/*"]
+    },
     "allowJs": true,
     "declaration": true,
     "declarationMap": true,
@@ -23,4 +30,6 @@
     "strict": true,
     "skipLibCheck": true
   },
+  "include": ["src", "tests"],
+  "exclude": ["coverage", "node_modules", "build"]
 }

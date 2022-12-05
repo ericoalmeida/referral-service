@@ -1,0 +1,65 @@
+version: '3'
+
+services:
+  database:
+    image: postgres:14.6-alpine
+    container_name: db.referral
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=referral
+    hostname: db.referral.dev
+    volumes:
+      - db_referral.volume:/var/lib/postgresql/data
+    expose:
+      - 5432
+    ports:
+      - 5432:5432
+    networks:
+      - referral.network
+
+  db_migration:
+    build:
+      context: .
+      dockerfile: dockerfile.db.migration
+    container_name: db.migration
+    depends_on:
+      - database
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db.referral.dev:5432/referral
+    hostname: db.migration.dev
+    networks:
+      - referral.network
+
+  app:
+    build:
+      context: .
+      dockerfile: dockerfile.development
+    container_name: app.referral
+    depends_on:
+      - db_migration
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db.referral.dev:5432/referral
+      - NODE_ENV=development
+      - PORT=7000
+      - PORT_DEBUG=9222
+    hostname: app.referral.dev
+    volumes:
+      - .:/app
+    networks:
+      - referral.network
+    expose:
+      - 7000
+      - 9222
+    ports:
+      - 7000:7000
+      - 9222:9222
+
+networks:
+  referral.network:
+    external:
+      true
+volumes:
+  db_referral.volume:
+    external:
+      true
