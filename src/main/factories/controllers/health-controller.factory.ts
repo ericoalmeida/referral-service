@@ -5,16 +5,12 @@ import { HealthPrismaRepository } from '@infra/repositories/prisma'
 import { HealthController } from '@presentation/controllers'
 import { ControllerProtocol, HealthRequestProtocol, HealthResponseProtocol } from '@presentation/protocols'
 
-class HealthControllerFactory {
-  private readonly dbClient = new PrismaClient()
+const healthControllerFactory = (): ControllerProtocol<HealthRequestProtocol, HealthResponseProtocol> => {
+  const dbClient = new PrismaClient()
+  const repository = new HealthPrismaRepository(dbClient)
+  const useCase = new DbHealthUseCase(repository)
 
-  private readonly repository = new HealthPrismaRepository(this.dbClient)
-
-  private readonly useCase = new DbHealthUseCase(this.repository)
-
-  public get controller (): ControllerProtocol<HealthRequestProtocol, HealthResponseProtocol> {
-    return new HealthController(this.useCase)
-  }
+  return new HealthController(useCase)
 }
 
-export { HealthControllerFactory }
+export { healthControllerFactory }
