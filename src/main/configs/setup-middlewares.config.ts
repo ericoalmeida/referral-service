@@ -1,7 +1,8 @@
 import { Express } from 'express'
 
-import { corsMiddleware } from '@main/middlewares'
+import { bodyParserMiddleware, corsMiddleware } from '@main/middlewares'
 
 export const setupMiddlewares = (app: Express): void => {
+  app.use(bodyParserMiddleware)
   app.use(corsMiddleware)
 }
