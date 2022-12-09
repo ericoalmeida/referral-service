@@ -8,7 +8,7 @@
     "build": "rimraf build && tsc",
     "build:production": "npm run build -- -p tsconfig-build.json",
     "start": "node ./build/src/main/server.js",
-    "start:dev": "node --inspect=0.0.0.0:${PORT_DEBUG} --nolazy ./build/src/main/server.js",
+    "start:dev": "nodemon -L --watch ./build --inspect=0.0.0.0:${PORT_DEBUG} --nolazy ./build/src/main/server.js",
     "db:deploy": "prisma migrate deploy",
     "db:reset": "prisma migrate reset -y",
     "lint": "eslint src/**",
