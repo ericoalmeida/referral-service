@@ -52,8 +52,8 @@ jobs:
         run: npm install
       #- name: Create database structure
       #  run: npm run db:deploy
-      - name: Check code tests
-        run: npm run test:ci
+      #- name: Check code tests
+      #  run: npm run test:ci
       #- name: Reset database structure
       #  run: npm run db:reset
       - name: Cleanup
