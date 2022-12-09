@@ -6,3 +6,14 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model ReferralMethods {
+  id         String   @db.Uuid          @id     @default(uuid())
+  user_id    String   @db.VarChar(40)   @unique
+  code       String   @db.VarChar(10)   @unique
+  link       String   @db.VarChar(80)   @unique
+  created_at DateTime @db.Timestamptz() @default(now())
+  updated_at DateTime @db.Timestamptz() @updatedAt
+
+  @@map("referral_methods")
+}
