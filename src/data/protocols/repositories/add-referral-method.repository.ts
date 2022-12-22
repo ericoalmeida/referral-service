@@ -1,7 +1,7 @@
-import { AddReferralMethodParams } from '@domain/params'
+import { AddReferralMethodRepositoryParams } from '@data/params/add-referral-method-repository.params'
 
 interface AddReferralMethodRepository {
-  add: (params: AddReferralMethodParams) => Promise<void>
+  add: (params: AddReferralMethodRepositoryParams) => Promise<void>
 }
 
 export { AddReferralMethodRepository }
