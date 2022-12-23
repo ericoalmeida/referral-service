@@ -7,19 +7,23 @@ describe('DbAddReferralMethodUseCase', () => {
     const expectedCallTimes = 1
 
     it('Should call repository with correct values', async () => {
-      const { sut, repository } = new DbAddReferralMethodUseCaseFactory()
+      const { sut, repository, referralMethodManagement } = new DbAddReferralMethodUseCaseFactory()
 
       const repositorySpy = jest.spyOn(repository, 'add')
 
       const referralMethodData = new ReferralMethodDataBuilder().build()
-      await sut.add(referralMethodData)
+
+      jest.spyOn(referralMethodManagement, 'createCode').mockReturnValueOnce(referralMethodData.code)
+      jest.spyOn(referralMethodManagement, 'createLink').mockReturnValueOnce(referralMethodData.link)
+
+      await sut.add({ user_id: referralMethodData.user_id })
 
       expect(repositorySpy).toHaveBeenCalledTimes(expectedCallTimes)
       expect(repositorySpy).toHaveBeenCalledWith(referralMethodData)
     })
 
     it('Should throws when repository throw', async () => {
-      const { sut, repository } = new DbAddReferralMethodUseCaseFactory()
+      const { sut, repository, referralMethodManagement } = new DbAddReferralMethodUseCaseFactory()
 
       const repositoryError = new Error()
 
@@ -30,8 +34,11 @@ describe('DbAddReferralMethodUseCase', () => {
 
       const referralMethodData = new ReferralMethodDataBuilder().build()
 
+      jest.spyOn(referralMethodManagement, 'createCode').mockReturnValueOnce(referralMethodData.code)
+      jest.spyOn(referralMethodManagement, 'createLink').mockReturnValueOnce(referralMethodData.link)
+
       try {
-        await sut.add(referralMethodData)
+        await sut.add({ user_id: referralMethodData.user_id })
       } catch (error) {
         expect(repositorySpy).toHaveBeenCalledTimes(expectedCallTimes)
         expect(repositorySpy).toHaveBeenCalledWith(referralMethodData)
