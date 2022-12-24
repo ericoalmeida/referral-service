@@ -1,28 +1,34 @@
+import { faker } from '@faker-js/faker'
 import { Express } from 'express'
 import request from 'supertest'
 
-import { AddReferralMethodRepositoryParams } from '@data/params/add-referral-method-repository.params'
 import { setupApp } from '@main/configs/setup-app.config'
 import { serverEndpointsConstants } from '@main/constants/server-endpoints.constants'
 import { dbClientFactory } from '@main/factories/db-client.factory'
 import { httpStatusCodeConstants } from '@presentation/constants/http-status-code.constants'
-import { ReferralMethodDataBuilder } from '@tests/data/builders/referral-method-data.builder'
+import { AddReferralMethodRequestProtocol } from '@presentation/protocols/add-referral-method-request.protocol'
+
+import { CommonDataBuilder } from '@tests/common/builders/common-data.builder'
 
 let app: Express
 
 describe('AddReferralMethod Route', () => {
-  let referralMethodData: AddReferralMethodRepositoryParams
+  let requestData: AddReferralMethodRequestProtocol
 
   beforeAll(() => {
     app = setupApp()
   })
 
   beforeEach(() => {
-    referralMethodData = new ReferralMethodDataBuilder().build()
+    requestData = new CommonDataBuilder<AddReferralMethodRequestProtocol>()
+      .with('user_id', faker.datatype.uuid())
+      .with('code', faker.datatype.string(8))
+      .with('link', faker.internet.url())
+      .build()
   })
 
   afterEach(async () => {
-    const { user_id } = referralMethodData
+    const { user_id } = requestData
 
     const dbClient = dbClientFactory()
     await dbClient.referralMethods.delete({
@@ -37,7 +43,7 @@ describe('AddReferralMethod Route', () => {
 
       const addReferralMethodURI = `${endpointsPrefix}${referralMethod.add}`
 
-      const { user_id } = referralMethodData
+      const { user_id } = requestData
 
       await request(app)
         .post(addReferralMethodURI)
@@ -53,7 +59,7 @@ describe('AddReferralMethod Route', () => {
 
       await request(app)
         .post(addReferralMethodURI)
-        .send(referralMethodData)
+        .send(requestData)
         .expect(successful.created)
     })
   })

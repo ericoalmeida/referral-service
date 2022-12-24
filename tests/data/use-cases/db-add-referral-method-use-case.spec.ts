@@ -1,17 +1,24 @@
 
-import { ReferralMethodDataBuilder } from '@tests/data/builders/referral-method-data.builder'
+import { faker } from '@faker-js/faker'
+
+import { AddReferralMethodRepositoryParams } from '@data/params/add-referral-method-repository.params'
+import { CommonDataBuilder } from '@tests/common/builders/common-data.builder'
 import { DbAddReferralMethodUseCaseFactory } from '@tests/data/factories/db-add-referral-method-usecase.factory'
 
 describe('DbAddReferralMethodUseCase', () => {
   describe('#add', () => {
     const expectedCallTimes = 1
 
+    const referralMethodData = new CommonDataBuilder<AddReferralMethodRepositoryParams>()
+      .with('user_id', faker.datatype.uuid())
+      .with('code', faker.datatype.string(8))
+      .with('link', faker.internet.url())
+      .build()
+
     it('Should call repository with correct values created', async () => {
       const { sut, repository, referralMethodManagement } = new DbAddReferralMethodUseCaseFactory()
 
       const repositorySpy = jest.spyOn(repository, 'add')
-
-      const referralMethodData = new ReferralMethodDataBuilder().build()
 
       jest.spyOn(referralMethodManagement, 'createCode').mockReturnValueOnce(referralMethodData.code)
       jest.spyOn(referralMethodManagement, 'createLink').mockReturnValueOnce(referralMethodData.link)
@@ -26,8 +33,6 @@ describe('DbAddReferralMethodUseCase', () => {
       const { sut, repository } = new DbAddReferralMethodUseCaseFactory()
 
       const repositorySpy = jest.spyOn(repository, 'add')
-
-      const referralMethodData = new ReferralMethodDataBuilder().build()
 
       await sut.add(referralMethodData)
 
@@ -44,8 +49,6 @@ describe('DbAddReferralMethodUseCase', () => {
       repositorySpy.mockImplementationOnce(() => {
         throw repositoryError
       })
-
-      const referralMethodData = new ReferralMethodDataBuilder().build()
 
       jest.spyOn(referralMethodManagement, 'createCode').mockReturnValueOnce(referralMethodData.code)
       jest.spyOn(referralMethodManagement, 'createLink').mockReturnValueOnce(referralMethodData.link)

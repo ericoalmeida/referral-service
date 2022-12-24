@@ -1,9 +1,10 @@
 import { faker } from '@faker-js/faker'
 import { ReferralMethods } from '@prisma/client'
-import { CommonDataBuilder } from '@tests/common/builders/common-data.builder'
 
+import { AddReferralMethodRepositoryParams } from '@data/params/add-referral-method-repository.params'
+
+import { CommonDataBuilder } from '@tests/common/builders/common-data.builder'
 import { dbClientMock } from '@tests/common/mocks/prisma-client.mock'
-import { ReferralMethodDataBuilder } from '@tests/data/builders/referral-method-data.builder'
 import { ReferralMethodPrismaRepositoryFactory } from '@tests/infra/factories/referral-method-prisma-repository.factory'
 
 describe('AddReferralMethodPrismaRepository', () => {
@@ -11,7 +12,11 @@ describe('AddReferralMethodPrismaRepository', () => {
     it('Should add a new referral method', async () => {
       const { sut } = new ReferralMethodPrismaRepositoryFactory()
 
-      const referralMethodData = new ReferralMethodDataBuilder().build()
+      const referralMethodData = new CommonDataBuilder<AddReferralMethodRepositoryParams>()
+        .with('user_id', faker.datatype.uuid())
+        .with('code', faker.datatype.string(8))
+        .with('link', faker.internet.url())
+        .build()
 
       await expect(sut.add(referralMethodData)).resolves.toBeUndefined()
     })
