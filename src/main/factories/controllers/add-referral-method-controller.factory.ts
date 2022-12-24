@@ -1,7 +1,7 @@
 
 import { DbAddReferralMethodUseCase } from '@data/use-cases/db-add-referral-method.usecase'
 import { ReferralMethodManagement } from '@infra/referral-method-management'
-import { AddReferralMethodPrismaRepository } from '@infra/repositories/prisma/add-referral-method-prisma.repository'
+import { ReferralMethodPrismaRepository } from '@infra/repositories/prisma/referral-method-prisma.repository'
 import { R4ndomStrAdapter } from '@main/adapters/r4ndom-str.adapter'
 import { LoggerControllerDecorator } from '@main/decorators/logger-controller.decorator'
 import { dbClientFactory } from '@main/factories/db-client.factory'
@@ -15,7 +15,7 @@ const addReferralMethodControllerFactory = (): ControllerProtocol<AddReferralMet
 
   const r4ndomStrAdapter = new R4ndomStrAdapter()
 
-  const repository = new AddReferralMethodPrismaRepository(dbClient)
+  const repository = new ReferralMethodPrismaRepository(dbClient)
   const referralMethodManagement = new ReferralMethodManagement(r4ndomStrAdapter)
 
   const useCase = new DbAddReferralMethodUseCase(referralMethodManagement, referralMethodManagement, repository)
