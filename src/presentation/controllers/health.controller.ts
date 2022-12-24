@@ -4,17 +4,17 @@ import { httpInternalServerError } from '@presentation/helpers/http-internal-ser
 import { httpNoContent } from '@presentation/helpers/http-no-content.helper'
 import { loggerError } from '@presentation/helpers/logger-error.helper'
 import { ControllerProtocol } from '@presentation/protocols/controller.protocol'
-import { HealthRequestProtocol } from '@presentation/protocols/health-request.protocol'
-import { HealthResponseProtocol } from '@presentation/protocols/health-response.protocol'
+import { EmptyRequestProtocol } from '@presentation/protocols/empty-request.protocol'
+import { EmptyResponseProtocol } from '@presentation/protocols/empty-response.protocol'
 import { HttpResponseProtocol } from '@presentation/protocols/http-response.protocol'
 
 export class HealthController
-implements ControllerProtocol<HealthRequestProtocol, HealthResponseProtocol> {
+implements ControllerProtocol<EmptyRequestProtocol, EmptyResponseProtocol> {
   constructor (private readonly health: HealthUseCase) {}
 
   public async handle (
-    request: HealthRequestProtocol
-  ): Promise<HttpResponseProtocol<HealthResponseProtocol>> {
+    request: EmptyRequestProtocol
+  ): Promise<HttpResponseProtocol<EmptyResponseProtocol>> {
     try {
       await this.health.check()
 

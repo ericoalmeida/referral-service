@@ -5,10 +5,10 @@ import { LoggerControllerDecorator } from '@main/decorators/logger-controller.de
 import { dbClientFactory } from '@main/factories/db-client.factory'
 import { HealthController } from '@presentation/controllers/health.controller'
 import { ControllerProtocol } from '@presentation/protocols/controller.protocol'
-import { HealthRequestProtocol } from '@presentation/protocols/health-request.protocol'
-import { HealthResponseProtocol } from '@presentation/protocols/health-response.protocol'
+import { EmptyRequestProtocol } from '@presentation/protocols/empty-request.protocol'
+import { EmptyResponseProtocol } from '@presentation/protocols/empty-response.protocol'
 
-const healthControllerFactory = (): ControllerProtocol<HealthRequestProtocol, HealthResponseProtocol> => {
+const healthControllerFactory = (): ControllerProtocol<EmptyRequestProtocol, EmptyResponseProtocol> => {
   const dbClient = dbClientFactory()
 
   const repository = new HealthPrismaRepository(dbClient)
