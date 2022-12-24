@@ -1,21 +1,20 @@
-import { HealthUseCase } from '@domain/use-cases'
-import { errorCodesConstants } from '@presentation/constants'
-import { httpInternalServerError, httpNoContent } from '@presentation/helpers'
+import { HealthUseCase } from '@domain/use-cases/health.usecase'
+import { errorCodesConstants } from '@presentation/constants/error-codes.constants'
+import { httpInternalServerError } from '@presentation/helpers/http-internal-server-error.helper'
+import { httpNoContent } from '@presentation/helpers/http-no-content.helper'
 import { loggerError } from '@presentation/helpers/logger-error.helper'
-import {
-  ControllerProtocol,
-  HealthRequestProtocol,
-  HealthResponseProtocol,
-  HttpResponseProtocol
-} from '@presentation/protocols'
+import { ControllerProtocol } from '@presentation/protocols/controller.protocol'
+import { EmptyRequestProtocol } from '@presentation/protocols/empty-request.protocol'
+import { EmptyResponseProtocol } from '@presentation/protocols/empty-response.protocol'
+import { HttpResponseProtocol } from '@presentation/protocols/http-response.protocol'
 
 export class HealthController
-implements ControllerProtocol<HealthRequestProtocol, HealthResponseProtocol> {
+implements ControllerProtocol<EmptyRequestProtocol, EmptyResponseProtocol> {
   constructor (private readonly health: HealthUseCase) {}
 
   public async handle (
-    request: HealthRequestProtocol
-  ): Promise<HttpResponseProtocol<HealthResponseProtocol>> {
+    request: EmptyRequestProtocol
+  ): Promise<HttpResponseProtocol<EmptyResponseProtocol>> {
     try {
       await this.health.check()
 

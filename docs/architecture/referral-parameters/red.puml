@@ -1,13 +1,13 @@
-@startuml ReferralParameters
+@startuml ReferralMethods
 
-entity referral_parameters {
+entity referral_methods {
  *id: uuid <<generated>> <<pk>>
  --
- *user_id: uuid <<uk>>
+ *user_id: string(40) <<uk>>
  *code: string(10) <<uk>>
- *link: string(255) <<uk>>
- created_at: datetime
- updated_at: datetime
+ *link: string(80) <<uk>>
+ created_at: timestampz
+ updated_at: timestampz
 }
 
 @enduml

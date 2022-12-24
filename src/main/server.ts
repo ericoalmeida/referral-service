@@ -1,7 +1,8 @@
+/* eslint-disable import/first */
 require('module-alias/register')
 
-// eslint-disable-next-line import/first
-import { environmentsConfig, setupApp } from '@main/configs'
+import { environmentsConfig } from '@main/configs/environments.config'
+import { setupApp } from '@main/configs/setup-app.config'
 
 const main = (): void => {
   const app = setupApp()

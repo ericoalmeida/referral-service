@@ -1,4 +1,4 @@
-import { DbHealthUseCaseFactory } from '@tests/data/factories'
+import { DbHealthUseCaseFactory } from '@tests/data/factories/db-health-usecase.factory'
 
 describe('DbHealthUseCase', () => {
   describe('#check', () => {

@@ -1,6 +1,7 @@
 import { loggerError } from '@presentation/helpers/logger-error.helper'
 import { loggerInfo } from '@presentation/helpers/logger-info.helper'
-import { ControllerProtocol, HttpResponseProtocol } from '@presentation/protocols'
+import { ControllerProtocol } from '@presentation/protocols/controller.protocol'
+import { HttpResponseProtocol } from '@presentation/protocols/http-response.protocol'
 
 class LoggerControllerDecorator implements ControllerProtocol<any, any> {
   constructor (

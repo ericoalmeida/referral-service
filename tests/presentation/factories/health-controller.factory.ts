@@ -1,17 +1,12 @@
-import { HealthController } from '@presentation/controllers'
-import {
-  ControllerProtocol,
-  HealthRequestProtocol,
-  HealthResponseProtocol
-} from '@presentation/protocols'
+import { HealthController } from '@presentation/controllers/health.controller'
 
-import { HealthUseCaseStub } from '@tests/presentation/stubs'
+import { HealthUseCaseStub } from '@tests/presentation/stubs/health-use-case.stub'
 
 class HealthControllerFactory {
-  public health = new HealthUseCaseStub()
+  public useCase = new HealthUseCaseStub()
 
-  public get sut (): ControllerProtocol<HealthRequestProtocol, HealthResponseProtocol> {
-    return new HealthController(this.health)
+  public get sut (): HealthController {
+    return new HealthController(this.useCase)
   }
 }
 
