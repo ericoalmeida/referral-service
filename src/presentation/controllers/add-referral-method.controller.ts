@@ -16,9 +16,9 @@ implements ControllerProtocol<AddReferralMethodRequestProtocol, EmptyResponsePro
     request: AddReferralMethodRequestProtocol
   ): Promise<HttpResponseProtocol<EmptyResponseProtocol>> {
     try {
-      const { user_id } = request
+      const { user_id, code, link } = request
 
-      await this.useCase.add({ user_id })
+      await this.useCase.add({ user_id, code, link })
 
       return httpCreated<EmptyResponseProtocol>({})
     } catch (error) {

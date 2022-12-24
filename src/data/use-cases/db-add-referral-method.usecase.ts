@@ -11,13 +11,27 @@ class DbAddReferralMethodUseCase implements AddReferralMethodUseCase {
     private readonly addReferralMethodRepository: AddReferralMethodRepository
   ) {}
 
+  private propertyIsInvalid (property?: string): boolean {
+    return !property
+  }
+
   async add (params: AddReferralMethodParams): Promise<void> {
+    let { code, link } = params
     const { user_id } = params
 
-    const code = this.referralCode.createCode()
-    const link = this.referralLink.createLink()
+    if (this.propertyIsInvalid(code)) {
+      code = this.referralCode.createCode()
+    }
 
-    await this.addReferralMethodRepository.add({ user_id, code, link })
+    if (this.propertyIsInvalid(link)) {
+      link = this.referralLink.createLink()
+    }
+
+    await this.addReferralMethodRepository.add({
+      user_id,
+      code: code as string,
+      link: link as string
+    })
   }
 }
 
