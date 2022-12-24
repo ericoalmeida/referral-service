@@ -1,6 +1,6 @@
 
-import { ReferralMethodDataBuilder } from '@tests/data/builders'
-import { DbAddReferralMethodUseCaseFactory } from '@tests/data/factories'
+import { ReferralMethodDataBuilder } from '@tests/data/builders/referral-method-data.builder'
+import { DbAddReferralMethodUseCaseFactory } from '@tests/data/factories/db-add-referral-method-usecase.factory'
 
 describe('DbAddReferralMethodUseCase', () => {
   describe('#add', () => {

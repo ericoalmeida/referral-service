@@ -1,5 +1,5 @@
-import { HealthRepository } from '@data/protocols/repositories'
-import { HealthUseCase } from '@domain/use-cases'
+import { HealthRepository } from '@data/protocols/repositories/health.repository'
+import { HealthUseCase } from '@domain/use-cases/health.usecase'
 
 class DbHealthUseCase implements HealthUseCase {
   constructor (private readonly repository: HealthRepository) {}

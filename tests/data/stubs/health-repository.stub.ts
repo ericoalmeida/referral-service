@@ -1,4 +1,4 @@
-import { HealthRepository } from '@data/protocols/repositories'
+import { HealthRepository } from '@data/protocols/repositories/health.repository'
 
 export class HealthRepositoryStub implements HealthRepository {
   private readonly healthCheckSuccessful = true

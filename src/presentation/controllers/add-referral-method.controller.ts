@@ -1,10 +1,12 @@
-import { AddReferralMethodUseCase } from '@domain/use-cases'
-import { errorCodesConstants } from '@presentation/constants'
-import { httpCreated, httpInternalServerError } from '@presentation/helpers'
+import { AddReferralMethodUseCase } from '@domain/use-cases/add-referral-method.usecase'
+import { errorCodesConstants } from '@presentation/constants/error-codes.constants'
+import { httpCreated } from '@presentation/helpers/http-created.helper'
+import { httpInternalServerError } from '@presentation/helpers/http-internal-server-error.helper'
 import { loggerError } from '@presentation/helpers/logger-error.helper'
-import { ControllerProtocol, HttpResponseProtocol } from '@presentation/protocols'
 import { AddReferralMethodRequestProtocol } from '@presentation/protocols/add-referral-method-request.protocol'
+import { ControllerProtocol } from '@presentation/protocols/controller.protocol'
 import { EmptyResponseProtocol } from '@presentation/protocols/empty-response.protocol'
+import { HttpResponseProtocol } from '@presentation/protocols/http-response.protocol'
 
 class AddReferralMethodController
 implements ControllerProtocol<AddReferralMethodRequestProtocol, EmptyResponseProtocol> {

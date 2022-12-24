@@ -1,7 +1,8 @@
-import { errorCodesConstants, httpStatusCodeConstants } from '@presentation/constants'
-import { httpInternalServerError } from '@presentation/helpers'
+import { errorCodesConstants } from '@presentation/constants/error-codes.constants'
+import { httpStatusCodeConstants } from '@presentation/constants/http-status-code.constants'
+import { httpInternalServerError } from '@presentation/helpers/http-internal-server-error.helper'
 
-import { HealthControllerFactory } from '@tests/presentation/factories'
+import { HealthControllerFactory } from '@tests/presentation/factories/health-controller.factory'
 
 describe('HealthController', () => {
   describe('#handle', () => {

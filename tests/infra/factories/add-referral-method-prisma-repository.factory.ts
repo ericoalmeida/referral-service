@@ -1,5 +1,5 @@
 import { AddReferralMethodRepository } from '@data/protocols/repositories/add-referral-method.repository'
-import { AddReferralMethodPrismaRepository } from '@infra/repositories/prisma'
+import { AddReferralMethodPrismaRepository } from '@infra/repositories/prisma/add-referral-method-prisma.repository'
 
 import { dbClientMock } from '@tests/common/mocks/prisma-client.mock'
 

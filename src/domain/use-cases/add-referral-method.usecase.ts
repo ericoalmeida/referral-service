@@ -1,4 +1,4 @@
-import { AddReferralMethodParams } from '@domain/params'
+import { AddReferralMethodParams } from '@domain/params/add-referral-method.params'
 
 interface AddReferralMethodUseCase {
   add: (params: AddReferralMethodParams) => Promise<void>

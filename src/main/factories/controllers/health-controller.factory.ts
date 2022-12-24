@@ -1,10 +1,12 @@
 import { PrismaClient } from '@prisma/client'
 
 import { DbHealthUseCase } from '@data/use-cases/db-health.usecase'
-import { HealthPrismaRepository } from '@infra/repositories/prisma'
-import { LoggerControllerDecorator } from '@main/decorators'
-import { HealthController } from '@presentation/controllers'
-import { ControllerProtocol, HealthRequestProtocol, HealthResponseProtocol } from '@presentation/protocols'
+import { HealthPrismaRepository } from '@infra/repositories/prisma/health-prisma.repository'
+import { LoggerControllerDecorator } from '@main/decorators/logger-controller.decorator'
+import { HealthController } from '@presentation/controllers/health.controller'
+import { ControllerProtocol } from '@presentation/protocols/controller.protocol'
+import { HealthRequestProtocol } from '@presentation/protocols/health-request.protocol'
+import { HealthResponseProtocol } from '@presentation/protocols/health-response.protocol'
 
 const healthControllerFactory = (): ControllerProtocol<HealthRequestProtocol, HealthResponseProtocol> => {
   const dbClient = new PrismaClient()

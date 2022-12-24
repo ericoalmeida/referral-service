@@ -1,4 +1,4 @@
-import { ReferralMethodDataBuilder } from '@tests/data/builders'
+import { ReferralMethodDataBuilder } from '@tests/data/builders/referral-method-data.builder'
 import { AddReferralMethodPrismaRepositoryFactory } from '@tests/infra/factories/add-referral-method-prisma-repository.factory'
 
 describe('AddReferralMethodPrismaRepository', () => {

@@ -1,5 +1,5 @@
-import { HealthRepository } from '@data/protocols/repositories'
-import { PrismaDBClient } from '@infra/repositories/prisma'
+import { HealthRepository } from '@data/protocols/repositories/health.repository'
+import { PrismaDBClient } from '@infra/repositories/prisma/prisma-db-client.type'
 
 export class HealthPrismaRepository implements HealthRepository {
   constructor (private readonly dbClient: PrismaDBClient) {}

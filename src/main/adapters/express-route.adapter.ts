@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 
-import { ControllerProtocol } from '@presentation/protocols'
+import { ControllerProtocol } from '@presentation/protocols/controller.protocol'
 
 const expressRouteAdapter = (controller: ControllerProtocol<any, any>) => {
   return async (request: Request, response: Response): Promise<Response<any, Record<any, any>>> => {

@@ -2,9 +2,9 @@ import { Express } from 'express'
 import request from 'supertest'
 
 import { faker } from '@faker-js/faker'
-import { setupApp } from '@main/configs'
-import { serverEndpointsConstants } from '@main/constants'
-import { httpStatusCodeConstants } from '@presentation/constants'
+import { setupApp } from '@main/configs/setup-app.config'
+import { serverEndpointsConstants } from '@main/constants/server-endpoints.constants'
+import { httpStatusCodeConstants } from '@presentation/constants/http-status-code.constants'
 
 let app: Express
 
