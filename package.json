@@ -12,7 +12,7 @@
     "db:deploy": "prisma migrate deploy",
     "db:reset": "prisma migrate reset -y",
     "lint": "eslint src/**",
-    "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
+    "test": "jest --passWithNoTests --silent --noStackTrace --runTestsByPath",
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:unit": "npm test -- --watch --config='./jest-unit.config.js'",
     "test:integration": "npm test -- --watch --config='./jest-integration.config.js'",
