@@ -17,10 +17,10 @@ describe('HealthCheck Route', () => {
       const { successful } = httpStatusCodeConstants
       const { endpointsPrefix, healthCheck } = serverEndpointsConstants
 
-      const healthCheckURI = `${endpointsPrefix}${healthCheck}`
+      const checkURI = `${endpointsPrefix}${healthCheck}`
 
       await request(app)
-        .get(healthCheckURI)
+        .get(checkURI)
         .send()
         .expect(successful.noContent)
     })

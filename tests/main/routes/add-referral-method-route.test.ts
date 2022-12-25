@@ -41,12 +41,12 @@ describe('AddReferralMethod Route', () => {
       const { successful } = httpStatusCodeConstants
       const { endpointsPrefix, referralMethod } = serverEndpointsConstants
 
-      const addReferralMethodURI = `${endpointsPrefix}${referralMethod.add}`
+      const addURI = `${endpointsPrefix}${referralMethod.add}`
 
       const { user_id } = requestData
 
       await request(app)
-        .post(addReferralMethodURI)
+        .post(addURI)
         .send({ user_id })
         .expect(successful.created)
     })
@@ -55,10 +55,10 @@ describe('AddReferralMethod Route', () => {
       const { successful } = httpStatusCodeConstants
       const { endpointsPrefix, referralMethod } = serverEndpointsConstants
 
-      const addReferralMethodURI = `${endpointsPrefix}${referralMethod.add}`
+      const addURI = `${endpointsPrefix}${referralMethod.add}`
 
       await request(app)
-        .post(addReferralMethodURI)
+        .post(addURI)
         .send(requestData)
         .expect(successful.created)
     })
