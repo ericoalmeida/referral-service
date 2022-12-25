@@ -5,7 +5,8 @@ export const httpStatusCodeConstants = {
     noContent: 204
   },
   clientError: {
-    badRequest: 400
+    badRequest: 400,
+    notFound: 404
   },
   serverError: {
     internalServerError: 500
