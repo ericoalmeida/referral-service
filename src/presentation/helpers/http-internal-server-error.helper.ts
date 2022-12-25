@@ -4,6 +4,6 @@ import { ErrorCodeProtocol } from '@presentation/protocols/error-code.protocol'
 import { HttpResponseProtocol } from '@presentation/protocols/http-response.protocol'
 
 export const httpInternalServerError = (error: ErrorCodeProtocol): HttpResponseProtocol<any> => ({
-  statusCode: httpStatusCodeConstants.serverError.internalServerError,
+  status_code: httpStatusCodeConstants.serverError.internalServerError,
   body: { error: new AppError(error) }
 })

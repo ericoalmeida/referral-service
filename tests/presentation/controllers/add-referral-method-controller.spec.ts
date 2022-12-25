@@ -22,7 +22,7 @@ describe('AddReferralMethodController', () => {
 
       expect(useCaseSpy).toHaveBeenCalledTimes(expectedUseCaseCallTimes)
       expect(useCaseSpy).toHaveBeenCalledWith({ user_id })
-      expect(response.statusCode).toBe(successful.created)
+      expect(response.status_code).toBe(successful.created)
     })
 
     it('Should return failure response with status code 500/internal server error', async () => {
@@ -39,7 +39,7 @@ describe('AddReferralMethodController', () => {
 
       expect(useCaseSpy).toHaveBeenCalledTimes(expectedUseCaseCallTimes)
       expect(useCaseSpy).toHaveBeenCalledWith({ user_id })
-      expect(response.statusCode).toBe(serverError.internalServerError)
+      expect(response.status_code).toBe(serverError.internalServerError)
       expect(response).toEqual(httpInternalServerError(referralMethod.creationFailure))
     })
   })

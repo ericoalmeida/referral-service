@@ -13,7 +13,7 @@ class LoggerControllerDecorator implements ControllerProtocol<any, any> {
 
     const httpResponse = await this.controller.handle(request)
 
-    if (httpResponse.statusCode === 500) {
+    if (httpResponse.status_code === 500) {
       loggerError('Request fails', { http_response: JSON.stringify(httpResponse) })
     }
 

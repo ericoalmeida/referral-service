@@ -1,5 +1,5 @@
 export interface HttpResponseProtocol<T> {
-  statusCode: number
+  status_code: number
   body?: {
     data?: T
     error?: any

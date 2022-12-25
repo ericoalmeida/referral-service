@@ -16,7 +16,7 @@ describe('HealthController', () => {
       const response = await sut.handle({})
 
       expect(useCaseSpy).toHaveBeenCalledTimes(expectedUseCaseCallTimes)
-      expect(response.statusCode).toBe(httpStatusCodeConstants.successful.noContent)
+      expect(response.status_code).toBe(httpStatusCodeConstants.successful.noContent)
     })
 
     it('Should return failure response with status code 500/internal-server-error', async () => {
@@ -30,7 +30,7 @@ describe('HealthController', () => {
       const { healthCheckFailure } = errorCodesConstants
 
       expect(useCaseSpy).toHaveBeenCalledTimes(expectedUseCaseCallTimes)
-      expect(response.statusCode).toBe(serverError.internalServerError)
+      expect(response.status_code).toBe(serverError.internalServerError)
       expect(response).toEqual(httpInternalServerError(healthCheckFailure))
     })
   })
