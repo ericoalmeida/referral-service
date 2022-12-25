@@ -14,7 +14,6 @@ describe('ReferralMethodManagement', () => {
 
       expect(referralCode.length).toBe(expectedReferralCodeSize)
       expect(stringGeneratorSpy).toHaveBeenCalledTimes(expectedGenerateCallTimes)
-      expect(stringGeneratorSpy).toHaveBeenCalledWith(expectedReferralCodeSize)
     })
 
     it('Should throws when generator throw', () => {
@@ -31,7 +30,6 @@ describe('ReferralMethodManagement', () => {
         sut.createCode()
       } catch (error) {
         expect(stringGeneratorSpy).toHaveBeenCalledTimes(expectedGenerateCallTimes)
-        expect(stringGeneratorSpy).toHaveBeenCalledWith(expectedReferralCodeSize)
         expect(error).toBe(mockedError)
       }
     })

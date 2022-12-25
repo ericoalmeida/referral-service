@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker'
 
 import { CreateReferralCodeProtocol } from '@data/protocols/create-referral-code.protocol'
 import { CreateReferralLinkProtocol } from '@data/protocols/create-referral-link.protocol'
+import { environmentsConfig } from '@main/configs/environments.config'
 
 class ReferralMethodManagementStub implements CreateReferralCodeProtocol, CreateReferralLinkProtocol {
   createLink (): string {
@@ -9,7 +10,7 @@ class ReferralMethodManagementStub implements CreateReferralCodeProtocol, Create
   }
 
   createCode (): string {
-    return faker.datatype.string(8)
+    return faker.datatype.string(environmentsConfig.referralCodeSize)
   }
 }
 

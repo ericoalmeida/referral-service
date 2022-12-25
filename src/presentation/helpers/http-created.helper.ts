@@ -2,6 +2,6 @@ import { httpStatusCodeConstants } from '@presentation/constants/http-status-cod
 import { HttpResponseProtocol } from '@presentation/protocols/http-response.protocol'
 
 export const httpCreated = <T>(data: T): HttpResponseProtocol<T> => ({
-  statusCode: httpStatusCodeConstants.successful.created,
+  status_code: httpStatusCodeConstants.successful.created,
   body: { data }
 })

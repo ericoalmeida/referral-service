@@ -13,7 +13,7 @@ const expressRouteAdapter = (controller: ControllerProtocol<any, any>) => {
     const httpResponse = await controller.handle(requestData)
 
     return response
-      .status(httpResponse.statusCode)
+      .status(httpResponse.status_code)
       .json(httpResponse.body)
   }
 }

@@ -1,6 +1,7 @@
 import { Generator, RandomStringGenerator } from 'r4ndm-str'
 
 import { StringGeneratorProtocol } from '@data/protocols/string-generator.protocol'
+import { environmentsConfig } from '@main/configs/environments.config'
 
 class R4ndomStrAdapter implements StringGeneratorProtocol {
   private readonly randomStr: Generator
@@ -13,8 +14,10 @@ class R4ndomStrAdapter implements StringGeneratorProtocol {
     })
   }
 
-  generate (size: number): string {
-    return this.randomStr.generate(size)
+  generate (): string {
+    return this.randomStr.generate(
+      environmentsConfig.referralCodeSize
+    )
   }
 }
 

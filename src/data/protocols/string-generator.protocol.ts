@@ -1,5 +1,5 @@
 interface StringGeneratorProtocol {
-  generate: (size: number) => string
+  generate: () => string
 }
 
 export { StringGeneratorProtocol }
