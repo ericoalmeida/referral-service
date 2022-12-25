@@ -9,15 +9,15 @@ class LoggerControllerDecorator implements ControllerProtocol<any, any> {
   ) {}
 
   async handle (request: any): Promise<HttpResponseProtocol<any>> {
-    loggerInfo('Starting request', { httpRequest: request })
+    loggerInfo('Starting request', { http_request: JSON.stringify(request) })
 
     const httpResponse = await this.controller.handle(request)
 
     if (httpResponse.statusCode === 500) {
-      loggerError('Request fails', { httpResponse })
+      loggerError('Request fails', { http_response: JSON.stringify(httpResponse) })
     }
 
-    loggerInfo('Ending request', { httpResponse })
+    loggerInfo('Ending request', { http_response: JSON.stringify(httpResponse) })
 
     return httpResponse
   }
