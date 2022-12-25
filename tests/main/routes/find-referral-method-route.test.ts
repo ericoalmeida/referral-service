@@ -3,6 +3,7 @@ import { Express } from 'express'
 import request from 'supertest'
 
 import { AddReferralMethodRepositoryParams } from '@data/params/add-referral-method-repository.params'
+import { environmentsConfig } from '@main/configs/environments.config'
 import { setupApp } from '@main/configs/setup-app.config'
 import { serverEndpointsConstants } from '@main/constants/server-endpoints.constants'
 import { dbClientFactory } from '@main/factories/db-client.factory'
@@ -28,7 +29,7 @@ describe('FindReferralMethod Route', () => {
 
     const referralMethodData = new CommonDataBuilder<AddReferralMethodRepositoryParams>()
       .with('user_id', requestData.user_id)
-      .with('code', faker.datatype.string(8))
+      .with('code', faker.datatype.string(environmentsConfig.referralCodeSize))
       .with('link', faker.internet.url())
       .build()
 

@@ -5,6 +5,7 @@ import { errorCodesConstants } from '@presentation/constants/error-codes.constan
 import { httpNotFound } from '@presentation/helpers/http-not-found.helper'
 import { FindReferralMethodRequestProtocol } from '@presentation/protocols/find-referral-method-request.protocol'
 
+import { environmentsConfig } from '@main/configs/environments.config'
 import { httpInternalServerError } from '@presentation/helpers/http-internal-server-error.helper'
 import { httpOk } from '@presentation/helpers/http-ok.helper'
 import { CommonDataBuilder } from '@tests/common/builders/common-data.builder'
@@ -36,7 +37,7 @@ describe('FindReferralMethodController', () => {
       const { sut, useCase } = new FindReferralMethodControllerFactory()
 
       const referralMethodData = new CommonDataBuilder<ReferralMethodModel>()
-        .with('code', faker.datatype.string(8))
+        .with('code', faker.datatype.string(environmentsConfig.referralCodeSize))
         .build()
 
       const useCaseSpy = jest.spyOn(useCase, 'findByUserId')

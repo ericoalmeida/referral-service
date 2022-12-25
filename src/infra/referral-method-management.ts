@@ -12,8 +12,7 @@ class ReferralMethodManagement implements CreateReferralCodeProtocol, CreateRefe
   }
 
   public createCode (): string {
-    const codeSize = 8
-    return this.stringGenerator.generate(codeSize)
+    return this.stringGenerator.generate()
   };
 }
 

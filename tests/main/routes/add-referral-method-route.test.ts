@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker'
 import { Express } from 'express'
 import request from 'supertest'
 
+import { environmentsConfig } from '@main/configs/environments.config'
 import { setupApp } from '@main/configs/setup-app.config'
 import { serverEndpointsConstants } from '@main/constants/server-endpoints.constants'
 import { dbClientFactory } from '@main/factories/db-client.factory'
@@ -22,7 +23,7 @@ describe('AddReferralMethod Route', () => {
   beforeEach(() => {
     requestData = new CommonDataBuilder<AddReferralMethodRequestProtocol>()
       .with('user_id', faker.datatype.uuid())
-      .with('code', faker.datatype.string(8))
+      .with('code', faker.datatype.string(environmentsConfig.referralCodeSize))
       .with('link', faker.internet.url())
       .build()
   })

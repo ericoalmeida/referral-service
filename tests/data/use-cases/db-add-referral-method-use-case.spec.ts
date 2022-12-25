@@ -2,6 +2,7 @@
 import { faker } from '@faker-js/faker'
 
 import { AddReferralMethodRepositoryParams } from '@data/params/add-referral-method-repository.params'
+import { environmentsConfig } from '@main/configs/environments.config'
 import { CommonDataBuilder } from '@tests/common/builders/common-data.builder'
 import { DbAddReferralMethodUseCaseFactory } from '@tests/data/factories/db-add-referral-method-usecase.factory'
 
@@ -11,7 +12,7 @@ describe('DbAddReferralMethodUseCase', () => {
 
     const referralMethodData = new CommonDataBuilder<AddReferralMethodRepositoryParams>()
       .with('user_id', faker.datatype.uuid())
-      .with('code', faker.datatype.string(8))
+      .with('code', faker.datatype.string(environmentsConfig.referralCodeSize))
       .with('link', faker.internet.url())
       .build()
 
