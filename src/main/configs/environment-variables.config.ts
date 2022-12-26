@@ -10,7 +10,7 @@ const applicationEnvironment = process.env.NODE_ENV !== undefined ? process.env.
 const port = process.env.PORT !== undefined ? process.env.PORT : 7000
 const referralCodeSize = 8
 
-export const environmentsConfig = {
+export const environmentVariablesConfig = {
   applicationEnvironment,
   port,
   referralCodeSize
