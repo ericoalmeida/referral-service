@@ -4,7 +4,7 @@ import request from 'supertest'
 
 import { environmentsConfig } from '@main/configs/environments.config'
 import { setupApp } from '@main/configs/setup-app.config'
-import { serverEndpointsConstants } from '@main/constants/server-endpoints.constants'
+import { applicationEndpointsConstants } from '@main/constants/application-endpoints.constants'
 import { dbClientFactory } from '@main/factories/db-client.factory'
 import { httpStatusCodeConstants } from '@presentation/constants/http-status-code.constants'
 import { AddReferralMethodRequestProtocol } from '@presentation/protocols/add-referral-method-request.protocol'
@@ -40,7 +40,7 @@ describe('AddReferralMethod Route', () => {
   describe('#POST /api/referral-method', () => {
     it('Should return success when send only user id', async () => {
       const { successful } = httpStatusCodeConstants
-      const { endpointsPrefix, referralMethod } = serverEndpointsConstants
+      const { endpointsPrefix, referralMethod } = applicationEndpointsConstants
 
       const addURI = `${endpointsPrefix}${referralMethod.add}`
 
@@ -54,7 +54,7 @@ describe('AddReferralMethod Route', () => {
 
     it('Should return success when send all properties', async () => {
       const { successful } = httpStatusCodeConstants
-      const { endpointsPrefix, referralMethod } = serverEndpointsConstants
+      const { endpointsPrefix, referralMethod } = applicationEndpointsConstants
 
       const addURI = `${endpointsPrefix}${referralMethod.add}`
 

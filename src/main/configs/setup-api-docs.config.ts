@@ -2,8 +2,8 @@ import { Express } from 'express'
 import swaggerUi from 'swagger-ui-express'
 
 import { environmentsConfig } from '@main/configs/environments.config'
+import { applicationEndpointsConstants } from '@main/constants/application-endpoints.constants'
 import { applicationEnvironmentsConstants } from '@main/constants/application-environments.constants'
-import { serverEndpointsConstants } from '@main/constants/server-endpoints.constants'
 import { swaggerSpecificationDoc } from '@main/docs/swagger-specification.doc'
 
 const runningInProductionEnvironment = (): boolean => {
@@ -16,7 +16,7 @@ const runningInProductionEnvironment = (): boolean => {
 const setupApiDocs = (app: Express): void => {
   if (runningInProductionEnvironment()) return
 
-  const { apiDocumentation } = serverEndpointsConstants
+  const { apiDocumentation } = applicationEndpointsConstants
 
   app.use(
     apiDocumentation,
