@@ -6,6 +6,8 @@ import { healthControllerFactory } from '@main/factories/controllers/health-cont
 
 const healthRoute = Router()
 
+const { healthCheck } = serverEndpointsConstants
+
 /**
  * @swagger
  * /api/health:
@@ -37,6 +39,6 @@ const healthRoute = Router()
  *                              type: string
  *                              example: Health check failed
  */
-healthRoute.get(serverEndpointsConstants.healthCheck, expressRouteAdapter(healthControllerFactory()))
+healthRoute.get(healthCheck, expressRouteAdapter(healthControllerFactory()))
 
 export { healthRoute }
