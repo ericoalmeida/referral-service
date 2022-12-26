@@ -1,6 +1,6 @@
 export const serverEndpointsConstants = {
   endpointsPrefix: '/api',
-  apiDocumentation: '/docs',
+  apiDocumentation: '/api-docs',
   healthCheck: '/health',
   referralMethod: {
     add: '/referral-method',

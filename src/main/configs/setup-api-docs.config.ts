@@ -16,10 +16,10 @@ const runningInProductionEnvironment = (): boolean => {
 const setupApiDocs = (app: Express): void => {
   if (runningInProductionEnvironment()) return
 
-  const { endpointsPrefix, apiDocumentation } = serverEndpointsConstants
+  const { apiDocumentation } = serverEndpointsConstants
 
   app.use(
-    `${endpointsPrefix}${apiDocumentation}`,
+    apiDocumentation,
     swaggerUi.serve,
     swaggerUi.setup(swaggerSpecificationDoc)
   )
