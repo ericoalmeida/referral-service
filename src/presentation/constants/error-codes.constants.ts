@@ -9,11 +9,11 @@ export const errorCodesConstants = {
       message: 'Referral method creation failed'
     },
     searchFailure: {
-      code: 'RM0001',
+      code: 'RM0002',
       message: 'Referral method search failed'
     },
     notFound: {
-      code: 'RM0002',
+      code: 'RM0003',
       message: 'Referral method not found'
     }
   }
