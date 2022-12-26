@@ -66,6 +66,73 @@ referralMethodRoute.post(
   referralMethod.add,
   expressRouteAdapter(addReferralMethodControllerFactory())
 )
+
+/**
+ * @swagger
+ * /api/referral-method/{user_id}:
+ *   get:
+ *     tags:
+ *       - Referral Method
+ *     summary: Finds a referral method by user ID
+ *     description: Finds a referral method by user ID
+ *     parameters:
+ *      - name: user_id
+ *        in: path
+ *        description: ID of user
+ *        required: true
+ *        schema:
+ *          type: string
+ *          format: uuid
+ *     responses:
+ *       200:
+ *         description: Success
+ *         content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                data:
+ *                  type: object
+ *                  properties:
+ *                    code:
+ *                      type: string
+ *                    link:
+ *                      type: string
+ *       404:
+ *         description: Referral method not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                  error:
+ *                     type: object
+ *                     properties:
+ *                        type:
+ *                          type: object
+ *                          properties:
+ *                            code:
+ *                              type: string
+ *                            message:
+ *                              type: string
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                  error:
+ *                     type: object
+ *                     properties:
+ *                        type:
+ *                          type: object
+ *                          properties:
+ *                            code:
+ *                              type: string
+ *                            message:
+ *                              type: string
+ */
 referralMethodRoute.get(
   referralMethod.find,
   expressRouteAdapter(findReferralMethodControllerFactory())
