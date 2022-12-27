@@ -3,7 +3,7 @@ import { ReferralMethods } from '@prisma/client'
 
 import { AddReferralMethodRepositoryParams } from '@data/params/add-referral-method-repository.params'
 
-import { environmentsConfig } from '@main/configs/environments.config'
+import { environmentVariablesConfig } from '@main/configs/environment-variables.config'
 import { CommonDataBuilder } from '@tests/common/builders/common-data.builder'
 import { dbClientMock } from '@tests/common/mocks/prisma-client.mock'
 import { ReferralMethodPrismaRepositoryFactory } from '@tests/infra/factories/referral-method-prisma-repository.factory'
@@ -15,7 +15,7 @@ describe('AddReferralMethodPrismaRepository', () => {
 
       const referralMethodData = new CommonDataBuilder<AddReferralMethodRepositoryParams>()
         .with('user_id', faker.datatype.uuid())
-        .with('code', faker.datatype.string(environmentsConfig.referralCodeSize))
+        .with('code', faker.datatype.string(environmentVariablesConfig.referralCodeSize))
         .with('link', faker.internet.url())
         .build()
 
@@ -40,7 +40,7 @@ describe('AddReferralMethodPrismaRepository', () => {
       const referralMethodDbRecordMock = new CommonDataBuilder<ReferralMethods>()
         .with('id', faker.datatype.uuid())
         .with('user_id', faker.datatype.uuid())
-        .with('code', faker.datatype.string(environmentsConfig.referralCodeSize))
+        .with('code', faker.datatype.string(environmentVariablesConfig.referralCodeSize))
         .with('link', faker.internet.url())
         .with('created_at', new Date())
         .with('updated_at', new Date())

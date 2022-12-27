@@ -1,5 +1,6 @@
-export const serverEndpointsConstants = {
+export const applicationEndpointsConstants = {
   endpointsPrefix: '/api',
+  apiDocumentation: '/api-docs',
   healthCheck: '/health',
   referralMethod: {
     add: '/referral-method',

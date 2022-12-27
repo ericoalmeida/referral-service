@@ -2,7 +2,7 @@ import { Express } from 'express'
 import request from 'supertest'
 
 import { setupApp } from '@main/configs/setup-app.config'
-import { serverEndpointsConstants } from '@main/constants/server-endpoints.constants'
+import { applicationEndpointsConstants } from '@main/constants/application-endpoints.constants'
 import { httpStatusCodeConstants } from '@presentation/constants/http-status-code.constants'
 
 let app: Express
@@ -15,7 +15,7 @@ describe('HealthCheck Route', () => {
   describe('#GET /api/health', () => {
     it('Should return success', async () => {
       const { successful } = httpStatusCodeConstants
-      const { endpointsPrefix, healthCheck } = serverEndpointsConstants
+      const { endpointsPrefix, healthCheck } = applicationEndpointsConstants
 
       const checkURI = `${endpointsPrefix}${healthCheck}`
 

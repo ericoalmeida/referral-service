@@ -3,9 +3,9 @@ import { Express } from 'express'
 import request from 'supertest'
 
 import { AddReferralMethodRepositoryParams } from '@data/params/add-referral-method-repository.params'
-import { environmentsConfig } from '@main/configs/environments.config'
+import { environmentVariablesConfig } from '@main/configs/environment-variables.config'
 import { setupApp } from '@main/configs/setup-app.config'
-import { serverEndpointsConstants } from '@main/constants/server-endpoints.constants'
+import { applicationEndpointsConstants } from '@main/constants/application-endpoints.constants'
 import { dbClientFactory } from '@main/factories/db-client.factory'
 import { httpStatusCodeConstants } from '@presentation/constants/http-status-code.constants'
 import { FindReferralMethodRequestProtocol } from '@presentation/protocols/find-referral-method-request.protocol'
@@ -29,7 +29,7 @@ describe('FindReferralMethod Route', () => {
 
     const referralMethodData = new CommonDataBuilder<AddReferralMethodRepositoryParams>()
       .with('user_id', requestData.user_id)
-      .with('code', faker.datatype.string(environmentsConfig.referralCodeSize))
+      .with('code', faker.datatype.string(environmentVariablesConfig.referralCodeSize))
       .with('link', faker.internet.url())
       .build()
 
@@ -47,7 +47,7 @@ describe('FindReferralMethod Route', () => {
   describe('GET /api/referral-method/:user_id', () => {
     it('Should return success when finds referral method by user id', async () => {
       const { successful } = httpStatusCodeConstants
-      const { referralMethod, endpointsPrefix } = serverEndpointsConstants
+      const { referralMethod, endpointsPrefix } = applicationEndpointsConstants
 
       const findURI = (`${endpointsPrefix}${referralMethod.find}`)
         .replace(':user_id', requestData.user_id)
