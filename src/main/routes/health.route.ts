@@ -18,26 +18,13 @@ const { healthCheck } = applicationEndpointsConstants
  *     description: Check application is ready!
  *     responses:
  *       204:
- *         description: Application is ready.
+ *         description: no content
  *       500:
- *         description: Applications is not ready
+ *         description: Internal server error
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                  error:
- *                     type: object
- *                     properties:
- *                        type:
- *                          type: object
- *                          properties:
- *                            code:
- *                              type: string
- *                              example: HC0001
- *                            message:
- *                              type: string
- *                              example: Health check failed
+ *               $ref: '#/components/schemas/AppError'
  */
 healthRoute.get(healthCheck, expressRouteAdapter(healthControllerFactory()))
 

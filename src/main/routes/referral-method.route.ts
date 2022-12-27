@@ -22,45 +22,21 @@ const { referralMethod } = applicationEndpointsConstants
  *      content:
  *        application/json:
  *          schema:
- *            required:
- *              - user_id
- *            type: object
- *            properties:
- *              user_id:
- *                type: string
- *                format: uuid
- *              code:
- *                type: string
- *              link:
- *                type: string
+ *            $ref: '#components/schemas/AddReferralMethod/Params'
  *      required: true
  *     responses:
  *       204:
  *         description: Application is ready
  *         content:
  *          application/json:
- *            schema:
- *              type: object
- *              properties:
- *                data:
- *                  type: object
+ *             schema:
+ *               $ref: '#/components/schemas/AddReferralMethod/Response'
  *       500:
  *         description: Applications is not ready
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                  error:
- *                     type: object
- *                     properties:
- *                        type:
- *                          type: object
- *                          properties:
- *                            code:
- *                              type: string
- *                            message:
- *                              type: string
+ *               $ref: '#/components/schemas/AppError'
  */
 referralMethodRoute.post(
   referralMethod.add,
@@ -89,49 +65,19 @@ referralMethodRoute.post(
  *         content:
  *          application/json:
  *            schema:
- *              type: object
- *              properties:
- *                data:
- *                  type: object
- *                  properties:
- *                    code:
- *                      type: string
- *                    link:
- *                      type: string
+ *              $ref: '#/components/schemas/FindReferralMethod/Response'
  *       404:
  *         description: Referral method not found
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                  error:
- *                     type: object
- *                     properties:
- *                        type:
- *                          type: object
- *                          properties:
- *                            code:
- *                              type: string
- *                            message:
- *                              type: string
+ *               $ref: '#/components/schemas/AppError'
  *       500:
  *         description: Internal server error
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                  error:
- *                     type: object
- *                     properties:
- *                        type:
- *                          type: object
- *                          properties:
- *                            code:
- *                              type: string
- *                            message:
- *                              type: string
+ *               $ref: '#/components/schemas/AppError'
  */
 referralMethodRoute.get(
   referralMethod.find,
