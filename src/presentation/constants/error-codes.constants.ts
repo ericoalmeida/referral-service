@@ -1,7 +1,11 @@
 export const errorCodesConstants = {
   validations: {
-    missingRequiredField: {
+    invalidRequiredField: {
       code: 'VA0001',
+      message: 'Required field is invalid'
+    },
+    missingRequiredField: {
+      code: 'VA0002',
       message: 'Required field is missing'
     }
   },
