@@ -1,4 +1,4 @@
-import { ErrorCodeProtocol } from '../error-code.protocol'
+import { ErrorCodeProtocol } from '@presentation/protocols/error-code.protocol'
 
 interface ValidationProtocol {
   validate: (payload: any) => ErrorCodeProtocol | undefined
