@@ -1,9 +1,17 @@
-import { Generator, RandomStringGenerator } from 'r4ndm-str'
+import {
+  checkContainsSimilarCharacters,
+  checkContainsSmallLetters,
+  checkContainsSymbols,
+  checkExactlyLength,
+  Generator,
+  RandomStringGenerator
+} from 'r4ndm-str'
 
 import { StringGeneratorProtocol } from '@data/protocols/string-generator.protocol'
 import { environmentVariablesConfig } from '@main/configs/environment-variables.config'
+import { ReferralCodeValidatorProtocol } from '@presentation/protocols/validators/referral-code-validator.protocol'
 
-class R4ndomStrAdapter implements StringGeneratorProtocol {
+class R4ndomStrAdapter implements StringGeneratorProtocol, ReferralCodeValidatorProtocol {
   private readonly randomStr: Generator
 
   constructor () {
@@ -18,6 +26,17 @@ class R4ndomStrAdapter implements StringGeneratorProtocol {
     return this.randomStr.generate(
       environmentVariablesConfig.referralCodeSize
     )
+  }
+
+  isReferralCode (code: string): boolean {
+    const { referralCodeSize } = environmentVariablesConfig
+
+    const hasValidLength = checkExactlyLength(referralCodeSize, code)
+    const hasNoSmallLetters = !checkContainsSmallLetters(code)
+    const hasNoSymbols = !checkContainsSymbols(code)
+    const hasNoSimilarCharacters = !checkContainsSimilarCharacters(code)
+
+    return hasValidLength && hasNoSmallLetters && hasNoSymbols && hasNoSimilarCharacters
   }
 }
 
