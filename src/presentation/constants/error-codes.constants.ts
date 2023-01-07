@@ -1,4 +1,14 @@
 export const errorCodesConstants = {
+  validations: {
+    invalidRequiredField: {
+      code: 'VA0001',
+      message: 'Required field is invalid'
+    },
+    missingRequiredField: {
+      code: 'VA0002',
+      message: 'Required field is missing'
+    }
+  },
   healthCheckFailure: {
     code: 'HC0001',
     message: 'Health check failed'

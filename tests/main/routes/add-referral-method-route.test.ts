@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker'
 import { Express } from 'express'
 import request from 'supertest'
 
-import { environmentVariablesConfig } from '@main/configs/environment-variables.config'
+import { R4ndomStrAdapter } from '@main/adapters/r4ndom-str.adapter'
 import { setupApp } from '@main/configs/setup-app.config'
 import { applicationEndpointsConstants } from '@main/constants/application-endpoints.constants'
 import { dbClientFactory } from '@main/factories/db-client.factory'
@@ -21,9 +21,11 @@ describe('AddReferralMethod Route', () => {
   })
 
   beforeEach(() => {
+    const code = new R4ndomStrAdapter().generate()
+
     requestData = new CommonDataBuilder<AddReferralMethodRequestProtocol>()
       .with('user_id', faker.datatype.uuid())
-      .with('code', faker.datatype.string(environmentVariablesConfig.referralCodeSize))
+      .with('code', code)
       .with('link', faker.internet.url())
       .build()
   })
