@@ -6,13 +6,16 @@ import { FindReferralMethodController } from '@presentation/controllers/find-ref
 import { ControllerProtocol } from '@presentation/protocols/controller.protocol'
 import { FindReferralMethodRequestProtocol } from '@presentation/protocols/find-referral-method-request.protocol'
 import { FindReferralMethodResponseProtocol } from '@presentation/protocols/find-referral-method-response.protocol'
+import { findReferralMethodValidationsFactory } from '../validations/find-referral-method-validations.factory'
 
 const findReferralMethodControllerFactory = (): ControllerProtocol<FindReferralMethodRequestProtocol, FindReferralMethodResponseProtocol> => {
   const dbClient = dbClientFactory()
 
   const repository = new ReferralMethodPrismaRepository(dbClient)
   const useCase = new DbFindReferralMethodUseCase(repository)
-  const controller = new FindReferralMethodController(useCase)
+
+  const validations = findReferralMethodValidationsFactory()
+  const controller = new FindReferralMethodController(useCase, validations)
 
   return new LoggerControllerDecorator(controller)
 }
