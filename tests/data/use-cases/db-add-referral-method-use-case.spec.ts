@@ -17,14 +17,28 @@ describe('DbAddReferralMethodUseCase', () => {
       .build()
 
     it('Should call repository with correct values created', async () => {
-      const { sut, repository, referralMethodManagement } = new DbAddReferralMethodUseCaseFactory()
+      const { sut, repository, codeCreator, deeplinkCreator } = new DbAddReferralMethodUseCaseFactory()
 
       const repositorySpy = jest.spyOn(repository, 'add')
 
-      jest.spyOn(referralMethodManagement, 'createCode').mockReturnValueOnce(referralMethodData.code)
-      jest.spyOn(referralMethodManagement, 'createLink').mockReturnValueOnce(referralMethodData.link)
+      jest.spyOn(codeCreator, 'create').mockReturnValueOnce(referralMethodData.code)
+      jest.spyOn(deeplinkCreator, 'create').mockReturnValueOnce(referralMethodData.link)
 
       await sut.add({ user_id: referralMethodData.user_id })
+
+      expect(repositorySpy).toHaveBeenCalledTimes(expectedCallTimes)
+      expect(repositorySpy).toHaveBeenCalledWith(referralMethodData)
+    })
+
+    it('Should call repository with partial correct values created', async () => {
+      const { sut, repository, codeCreator, deeplinkCreator } = new DbAddReferralMethodUseCaseFactory()
+
+      const repositorySpy = jest.spyOn(repository, 'add')
+
+      jest.spyOn(codeCreator, 'create').mockReturnValueOnce(referralMethodData.code)
+      jest.spyOn(deeplinkCreator, 'create').mockReturnValueOnce(referralMethodData.link)
+
+      await sut.add({ user_id: referralMethodData.user_id, code: referralMethodData.code })
 
       expect(repositorySpy).toHaveBeenCalledTimes(expectedCallTimes)
       expect(repositorySpy).toHaveBeenCalledWith(referralMethodData)
@@ -42,7 +56,7 @@ describe('DbAddReferralMethodUseCase', () => {
     })
 
     it('Should throws when repository throw', async () => {
-      const { sut, repository, referralMethodManagement } = new DbAddReferralMethodUseCaseFactory()
+      const { sut, repository, codeCreator, deeplinkCreator } = new DbAddReferralMethodUseCaseFactory()
 
       const repositoryError = new Error()
 
@@ -51,8 +65,8 @@ describe('DbAddReferralMethodUseCase', () => {
         throw repositoryError
       })
 
-      jest.spyOn(referralMethodManagement, 'createCode').mockReturnValueOnce(referralMethodData.code)
-      jest.spyOn(referralMethodManagement, 'createLink').mockReturnValueOnce(referralMethodData.link)
+      jest.spyOn(codeCreator, 'create').mockReturnValueOnce(referralMethodData.code)
+      jest.spyOn(deeplinkCreator, 'create').mockReturnValueOnce(referralMethodData.link)
 
       try {
         await sut.add({ user_id: referralMethodData.user_id })
