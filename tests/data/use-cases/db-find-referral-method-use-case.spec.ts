@@ -1,6 +1,6 @@
 import { ReferralMethodModel } from '@domain/models/referral-method.model'
 import { faker } from '@faker-js/faker'
-import { environmentsConfig } from '@main/configs/environments.config'
+import { environmentVariablesConfig } from '@main/configs/environment-variables.config'
 import { CommonDataBuilder } from '@tests/common/builders/common-data.builder'
 
 import { DbFindReferralMethodUseCaseFactory } from '@tests/data/factories/db-find-referral-method-usecase.factory'
@@ -28,7 +28,7 @@ describe('DbFindReferralMethodUseCase', () => {
       const { sut, repository } = new DbFindReferralMethodUseCaseFactory()
 
       const referralMethodModelData = new CommonDataBuilder<ReferralMethodModel>()
-        .with('code', faker.datatype.string(environmentsConfig.referralCodeSize))
+        .with('code', faker.datatype.string(environmentVariablesConfig.referralCodeSize))
         .with('link', faker.internet.url())
         .build()
 

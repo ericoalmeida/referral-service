@@ -22,7 +22,7 @@
     "emitDeclarationOnly": false,
     "sourceMap": true,
     "outDir": "./build",
-    "removeComments": true,
+    "removeComments": false,
     "importsNotUsedAsValues": "remove",
     "newLine": "lf",
     "esModuleInterop": true,

@@ -3,18 +3,21 @@ import { Express } from 'express'
 import request from 'supertest'
 
 import { AddReferralMethodRepositoryParams } from '@data/params/add-referral-method-repository.params'
-import { environmentsConfig } from '@main/configs/environments.config'
+import { environmentVariablesConfig } from '@main/configs/environment-variables.config'
 import { setupApp } from '@main/configs/setup-app.config'
-import { serverEndpointsConstants } from '@main/constants/server-endpoints.constants'
+import { applicationEndpointsConstants } from '@main/constants/application-endpoints.constants'
 import { dbClientFactory } from '@main/factories/db-client.factory'
 import { httpStatusCodeConstants } from '@presentation/constants/http-status-code.constants'
+import { httpOk } from '@presentation/helpers/http-ok.helper'
 import { FindReferralMethodRequestProtocol } from '@presentation/protocols/find-referral-method-request.protocol'
+import { FindReferralMethodResponseProtocol } from '@presentation/protocols/find-referral-method-response.protocol'
 import { CommonDataBuilder } from '@tests/common/builders/common-data.builder'
 
 let app: Express
 
 describe('FindReferralMethod Route', () => {
   let requestData: FindReferralMethodRequestProtocol
+  let referralMethodData: AddReferralMethodRepositoryParams
 
   const dbClient = dbClientFactory()
 
@@ -27,9 +30,9 @@ describe('FindReferralMethod Route', () => {
       .with('user_id', faker.datatype.uuid())
       .build()
 
-    const referralMethodData = new CommonDataBuilder<AddReferralMethodRepositoryParams>()
+    referralMethodData = new CommonDataBuilder<AddReferralMethodRepositoryParams>()
       .with('user_id', requestData.user_id)
-      .with('code', faker.datatype.string(environmentsConfig.referralCodeSize))
+      .with('code', faker.datatype.string(environmentVariablesConfig.referralCodeSize))
       .with('link', faker.internet.url())
       .build()
 
@@ -47,15 +50,23 @@ describe('FindReferralMethod Route', () => {
   describe('GET /api/referral-method/:user_id', () => {
     it('Should return success when finds referral method by user id', async () => {
       const { successful } = httpStatusCodeConstants
-      const { referralMethod, endpointsPrefix } = serverEndpointsConstants
+      const { referralMethod, endpointsPrefix } = applicationEndpointsConstants
 
       const findURI = (`${endpointsPrefix}${referralMethod.find}`)
         .replace(':user_id', requestData.user_id)
 
-      await request(app)
+      const dbRecordFound = new CommonDataBuilder<FindReferralMethodResponseProtocol>()
+        .with('code', referralMethodData.code)
+        .with('link', referralMethodData.link)
+        .build()
+      const expectedResponse = httpOk(dbRecordFound)
+
+      const response = await request(app)
         .get(findURI)
         .send(requestData)
-        .expect(successful.ok)
+
+      expect(response.status).toBe(successful.ok)
+      expect(response.body).toEqual(expectedResponse.body)
     })
   })
 })
