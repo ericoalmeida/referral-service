@@ -1,37 +1,31 @@
-import { CreateReferralCodeProtocol } from '@data/protocols/create-referral-code.protocol'
-import { CreateReferralLinkProtocol } from '@data/protocols/create-referral-link.protocol'
+import { CodeCreatorProtocol } from '@data/protocols/code-creator.protocol'
+import { DeeplinkCreatorProtocol } from '@data/protocols/deeplink-creator.protocol'
 import { AddReferralMethodRepository } from '@data/protocols/repositories/add-referral-method.repository'
 import { AddReferralMethodParams } from '@domain/params/add-referral-method.params'
 import { AddReferralMethodUseCase } from '@domain/use-cases/add-referral-method.usecase'
 
 class DbAddReferralMethodUseCase implements AddReferralMethodUseCase {
   constructor (
-    private readonly referralCode: CreateReferralCodeProtocol,
-    private readonly referralLink: CreateReferralLinkProtocol,
-    private readonly addReferralMethodRepository: AddReferralMethodRepository
+    private readonly referralCode: CodeCreatorProtocol,
+    private readonly referralLink: DeeplinkCreatorProtocol,
+    private readonly repository: AddReferralMethodRepository
   ) {}
 
-  private invalidProperty (property?: string): boolean {
-    return !property
-  }
-
   async add (params: AddReferralMethodParams): Promise<void> {
-    let { code, link } = params
     const { user_id } = params
 
-    if (this.invalidProperty(code)) {
-      code = this.referralCode.createCode()
+    let { code, link } = params
+
+    if (!code) {
+      code = this.referralCode.create()
+      link = this.referralLink.create(code)
     }
 
-    if (this.invalidProperty(link)) {
-      link = this.referralLink.createLink()
+    if (!link) {
+      link = this.referralLink.create(code)
     }
 
-    await this.addReferralMethodRepository.add({
-      user_id,
-      code: code as string,
-      link: link as string
-    })
+    await this.repository.add({ user_id, code, link })
   }
 }
 
