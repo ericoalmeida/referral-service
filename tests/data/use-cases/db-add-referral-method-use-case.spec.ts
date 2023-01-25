@@ -76,5 +76,27 @@ describe('DbAddReferralMethodUseCase', () => {
         expect(error).toBe(repositoryError)
       }
     })
+
+    it('Should call repository with a new code and link when then already exists with another user', async () => {
+      const { sut, repository, codeCreator, deeplinkCreator } = new DbAddReferralMethodUseCaseFactory()
+
+      const repositorySpy = jest.spyOn(repository, 'add')
+
+      const code = faker.datatype.string(environmentVariablesConfig.referralCodeSize)
+      const link = faker.internet.url()
+
+      jest.spyOn(repository, 'checkByCode').mockResolvedValueOnce(true)
+      jest.spyOn(codeCreator, 'create').mockReturnValueOnce(code)
+      jest.spyOn(deeplinkCreator, 'create').mockReturnValueOnce(link)
+
+      await sut.add(referralMethodData)
+
+      expect(repositorySpy).toHaveBeenCalledTimes(expectedCallTimes)
+      expect(repositorySpy).toHaveBeenCalledWith({
+        user_id: referralMethodData.user_id,
+        code,
+        link
+      })
+    })
   })
 })

@@ -9,12 +9,14 @@ import { dbClientFactory } from '@main/factories/db-client.factory'
 import { httpStatusCodeConstants } from '@presentation/constants/http-status-code.constants'
 import { AddReferralMethodRequestProtocol } from '@presentation/protocols/add-referral-method-request.protocol'
 
+import { PrismaDBClient } from '@infra/repositories/prisma/prisma-db-client.type'
 import { CommonDataBuilder } from '@tests/common/builders/common-data.builder'
 
 let app: Express
 
 describe('AddReferralMethod Route', () => {
   let requestData: AddReferralMethodRequestProtocol
+  let dbClient: PrismaDBClient
 
   beforeAll(() => {
     app = setupApp()
@@ -33,7 +35,7 @@ describe('AddReferralMethod Route', () => {
   afterEach(async () => {
     const { user_id } = requestData
 
-    const dbClient = dbClientFactory()
+    dbClient = dbClientFactory()
     await dbClient.referralMethods.delete({
       where: { user_id }
     })
@@ -59,6 +61,26 @@ describe('AddReferralMethod Route', () => {
       const { endpointsPrefix, referralMethod } = applicationEndpointsConstants
 
       const addURI = `${endpointsPrefix}${referralMethod.add}`
+
+      await request(app)
+        .post(addURI)
+        .send(requestData)
+        .expect(successful.created)
+    })
+
+    it('Should return success when send referral method that already exists', async () => {
+      const { successful } = httpStatusCodeConstants
+      const { endpointsPrefix, referralMethod } = applicationEndpointsConstants
+
+      const addURI = `${endpointsPrefix}${referralMethod.add}`
+
+      await dbClient.referralMethods.create({
+        data: {
+          user_id: faker.datatype.uuid(),
+          code: String(requestData.code),
+          link: String(requestData.link)
+        }
+      })
 
       await request(app)
         .post(addURI)
