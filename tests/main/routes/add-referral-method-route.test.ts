@@ -76,7 +76,7 @@ describe('AddReferralMethod Route', () => {
 
       await dbClient.referralMethods.create({
         data: {
-          user_id: faker.datatype.uuid(),
+          user_id: requestData.user_id,
           code: String(requestData.code),
           link: String(requestData.link)
         }

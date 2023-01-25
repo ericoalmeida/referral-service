@@ -2,12 +2,15 @@ import { CodeCreatorProtocol } from '@data/protocols/code-creator.protocol'
 import { DeeplinkCreatorProtocol } from '@data/protocols/deeplink-creator.protocol'
 import { AddReferralMethodRepository } from '@data/protocols/repositories/add-referral-method.repository'
 import { CheckReferralMethodExistByCodeRepository } from '@data/protocols/repositories/check-referral-method-exist-by-code.repository'
+import { CheckReferralMethodExistByUserIdRepository } from '@data/protocols/repositories/check-referral-method-exist-by-user-id.repository'
 import { AddReferralMethodParams } from '@domain/params/add-referral-method.params'
 import { AddReferralMethodUseCase } from '@domain/use-cases/add-referral-method.usecase'
 
 type ReferralMethodRepository =
 AddReferralMethodRepository &
-CheckReferralMethodExistByCodeRepository
+CheckReferralMethodExistByCodeRepository &
+CheckReferralMethodExistByUserIdRepository
+
 class DbAddReferralMethodUseCase implements AddReferralMethodUseCase {
   constructor (
     private readonly referralCode: CodeCreatorProtocol,
@@ -28,6 +31,10 @@ class DbAddReferralMethodUseCase implements AddReferralMethodUseCase {
     if (!link) {
       link = this.referralLink.create(code)
     }
+
+    const userHasReferralMethod = await this.repository.checkByUserId(user_id)
+
+    if (userHasReferralMethod) { return }
 
     const referralMethodExist = await this.repository.checkByCode(code)
 
