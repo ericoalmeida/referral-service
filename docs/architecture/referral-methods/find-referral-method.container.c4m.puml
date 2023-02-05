@@ -19,7 +19,7 @@ System_Boundary(systemContainer, "Referral Service") {
 Rel(bankingCustomer, mobileApp, "Gets a referral parameters")
 Rel_R(mobileApp, gatewayMobile, "Makes API calls to", "JSON/HTTP")
 Rel(gatewayMobile, referralService, "Makes API calls to", "JSON/HTTP")
-Rel_L(referralService, database, "Reads from and writes to", "ORM/PL-PGSQL")
+Rel_L(referralService, database, "Reads from", "ORM/PL-PGSQL")
 
 SHOW_LEGEND()
 
