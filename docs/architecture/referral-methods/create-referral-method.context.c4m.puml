@@ -5,10 +5,12 @@ Person(bankingCustomer, "Customer", "A customer of the bank")
 System_Ext(gatewayMobile, "Gateway Mobile", "Application gateway")
 System_Ext(appsflyer, "Appsflyer", "Provides a deeplink")
 System(referralService, "Referral Service", "Provides user referral code")
+System(mobileApp, "Mobile App", "Provides user create a referral method")
 
-Rel_R(bankingCustomer, gatewayMobile, "Sends user ID")
-Rel(gatewayMobile, referralService, "Sends user ID")
-Rel_R(referralService, appsflyer, "Gets a deeplink")
+Rel_R(bankingCustomer, mobileApp, "Requires a new referral method")
+Rel(mobileApp, gatewayMobile, "Sends user ID")
+Rel_L(gatewayMobile, referralService, "Sends user ID")
+Rel(referralService, appsflyer, "Gets a deeplink")
 
 SHOW_LEGEND()
 
