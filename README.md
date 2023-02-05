@@ -12,7 +12,7 @@ Engine for managing user referrals
 
 ### Technologies
 
-- Node (v18..)
+- Node (v18.12.1)
 - Typescript/Javascript
 - Express
 - Jest

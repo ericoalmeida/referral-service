@@ -1,0 +1,17 @@
+@startuml Context
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Person(bankingCustomer, "Customer", "A customer of the bank")
+System_Ext(gatewayMobile, "Gateway Mobile", "Application gateway")
+System_Ext(appsflyer, "Appsflyer", "Provides a deeplink")
+System(referralService, "Referral Service", "Provides user referral code")
+System(mobileApp, "Mobile App", "Provides user create a referral method")
+
+Rel_R(bankingCustomer, mobileApp, "Requires a new referral method")
+Rel(mobileApp, gatewayMobile, "Sends user ID")
+Rel_L(gatewayMobile, referralService, "Sends user ID")
+Rel(referralService, appsflyer, "Gets a deeplink")
+
+SHOW_LEGEND()
+
+@enduml

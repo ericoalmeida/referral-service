@@ -8,18 +8,20 @@
 
 Person(bankingCustomer, "Customer", "A customer of the bank")
 
-Container(mobileApp, "Mobile Application", "React Native", "Provides user referral code", $sprite="react")
+Container(mobileApp, "Mobile Application", "React Native", "Provides user referral method", $sprite="react")
 System_Ext(gatewayMobile, "Gateway Mobile", "Application gateway")
+System_Ext(appsflyer, "Appsflyer", "Deeplink provider")
 
 System_Boundary(systemContainer, "Referral Service") {
-  Container(referralService, "API Application", "Node.js", "Allows user to gets referral code", $sprite="nodejs")
-  ContainerDb(database, "Database", "PostgreSQL", "Holds referral codes information", $sprite="postgresql")
+  Container(referralService, "API Application", "Node.js", "Allows user to creates referral method", $sprite="nodejs")
+  ContainerDb(database, "Database", "PostgreSQL", "Holds referral methods information", $sprite="postgresql")
 }
 
-Rel(bankingCustomer, mobileApp, "Gets a referral parameters")
+Rel(bankingCustomer, mobileApp, "Requires a new referral method")
 Rel_R(mobileApp, gatewayMobile, "Makes API calls to", "JSON/HTTP")
 Rel(gatewayMobile, referralService, "Makes API calls to", "JSON/HTTP")
-Rel_L(referralService, database, "Reads from and writes to", "ORM/PL-PGSQL")
+Rel_R(referralService, appsflyer, "Gets a deeplink", "JSON/HTTP")
+Rel_L(referralService, database, "Writes to", "ORM/PL-PGSQL")
 
 SHOW_LEGEND()
 

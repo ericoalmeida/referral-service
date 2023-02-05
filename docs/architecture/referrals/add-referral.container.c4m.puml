@@ -1,0 +1,26 @@
+@startuml Container
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+!include DEVICONS/nodejs.puml
+!include DEVICONS/postgresql.puml
+!include DEVICONS/react.puml
+
+Person(bankingCustomer, "Customer", "A customer of the bank")
+
+Container(mobileApp, "Mobile Application", "React Native", "Provides user referrals engine", $sprite="react")
+System_Ext(gatewayMobile, "Gateway Mobile", "Application gateway")
+
+System_Boundary(systemContainer, "Referral Service") {
+  Container(referralService, "API Application", "Node.js", "Allows user to add a referral", $sprite="nodejs")
+  ContainerDb(database, "Database", "PostgreSQL", "Holds referrals information", $sprite="postgresql")
+}
+
+Rel(bankingCustomer, mobileApp, "Sends a user referral code")
+Rel_R(mobileApp, gatewayMobile, "Makes API calls to", "JSON/HTTP")
+Rel(gatewayMobile, referralService, "Makes API calls to", "JSON/HTTP")
+Rel_L(referralService, database, "Writes to", "ORM/PL-PGSQL")
+
+SHOW_LEGEND()
+
+@enduml

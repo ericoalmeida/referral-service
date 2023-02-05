@@ -1,0 +1,15 @@
+@startuml Context
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Person(bankingCustomer, "Customer", "A customer of the bank")
+System_Ext(gatewayMobile, "Gateway Mobile", "Application gateway")
+System(referralService, "Referral Service", "Provides referral engine")
+System(mobileApp, "Mobile App", "Provides banking features")
+
+Rel_R(bankingCustomer, mobileApp, "Sends user referral code")
+Rel(mobileApp, gatewayMobile, "Sends user referral code")
+Rel_L(gatewayMobile, referralService, "Sends user referral code")
+
+SHOW_LEGEND()
+
+@enduml
